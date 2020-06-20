@@ -1,4 +1,10 @@
+const cards = require('./cards');
+const users = require('./users');
+
 module.exports = (app) => {
+  cards(app);
+  users(app);
+
   app.use((_req, res) => {
     res.status(404);
     res.send({ message: 'Запрашиваемый ресурс не найден' });
@@ -9,6 +15,6 @@ module.exports = (app) => {
       return next(err);
     }
     res.status(500);
-    return res.send('error', { error: err });
+    return res.send({ error: err });
   });
 };
